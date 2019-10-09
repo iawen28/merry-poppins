@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bubbles</title>
+  <!-- <link rel="stylesheet" href="style.css"> -->
+  <style>
+    body {
+      background-color: white;
+
+    }
+    svg {
+      position: absolute;
+    }
+    .bubble {
+      height: 12vw;
+      width: 12vw;
+      position: absolute;
+      border-radius: 50%;
+      -webkit-transition: height 2s, width 2s;
+      -moz-transition: height 2s, width 2s;
+      -o-transition: height 2s, width 2s;
+      transition: height 2s, width 2s;
+    }
+
+    /*light refraction*/
+    .bubble:before {
+      content: "";
+      display: block;
+      z-index: 10;
+      position: relative;
+      width: 5vw;
+      height: 5vw;
+      border-radius: 50%;
+      box-shadow: 1.6vw -1.4vw 0.2vw -1.5vw white;
+      top: 17%;
+      right: 17%;
+      float: right;
+      opacity: 0.7;
+    }
+
+    .bubble.hovBR {
+      animation: wobbleTLBR 0.7s linear;
+      transform-origin: 10% 10%;
+    }
+
+    .bubble.hovTL {
+      animation: wobbleTLBR 0.7s linear;
+      transform-origin: 85% 85%;
+    }
+
+    .bubble.hovTR {
+      animation: wobbleTRBL 0.7s linear;
+      transform-origin: 15% 85%;
+    }
+
+    .bubble.hovBL {
+      animation: wobbleTRBL 0.7s linear;
+      transform-origin: 90% 10%;
+    }
+
+    .bubble.hovL {
+      animation: wobbleLR 0.7s linear;
+      transform-origin: 90% 50%;
+    }
+
+    .bubble.hovR {
+      animation: wobbleLR 0.7s linear;
+      transform-origin: 10% 50%;
+    }
+
+    .bubble.hovT {
+      animation: wobbleTB 0.7s linear;
+      transform-origin: 50% 90%;
+    }
+
+    .bubble.hovB {
+      animation: wobbleTB 0.7s linear;
+      transform-origin: 50% 10%;
+    }
+
+    .bubble-main-color {
+      position: inherit;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 140, 255, 0.2);
+      background: radial-gradient(ellipse at center, 
+        rgba(0,140,255, 0.1) 0%, 
+        rgba(0,140,255, 0.1) 55%, 
+        rgba(0,140,255, 0.3) 95%, 
+        rgba(0,140,255, 1) 100%
+      );
+      animation: mainColorFade 6s linear infinite;
+
+    }
+    .bubble-alt-color {
+      position: inherit;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 217, 193, 0.2);
+      background: radial-gradient(ellipse at center, 
+        rgba(0, 217, 193, 0.1) 0%, 
+        rgba(0, 217, 193, 0.1) 55%, 
+        rgba(0, 217, 193, 0.3) 95%, 
+        rgba(0, 217, 193, 1) 100%
+      );
+      animation: altColorFade 6s linear infinite;
+
+    }
+
+    /*add other browsers*/
+    @-webkit-keyframes mainColorFade {
+      0%, 100%{
+        opacity: 1;
+      }
+      50% {
+        opacity: 0;
+      }
+    }
+    @-webkit-keyframes altColorFade {
+      0%, 100%{
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+    @-webkit-keyframes wobbleTLBR {
+      24% {
+        transform: skewY(-4deg) rotateZ(3deg); 
+      }
+      48% {
+        -webkit-transform: none;
+        transform: none;
+      }
+      76% {
+        transform: skewY(-1.32deg) rotateZ(1deg);
+      }
+    }
+
+    @-webkit-keyframes wobbleTRBL {
+      24% {
+        transform: skewY(4deg) rotateZ(-3deg); 
+      }
+      48%{
+        -webkit-transform: none;
+        transform: none;
+      }
+      76% {
+        transform: skewY(1.32deg) rotateZ(-1deg);
+      }
+    }
+
+    @-webkit-keyframes wobbleLR {
+      24% {
+        -webkit-transform: matrix(0.96, 0, 0, 1.04, 0, 0); 
+        transform: matrix(0.96, 0, 0, 1.04, 0, 0);
+      }
+      48% {
+        -webkit-transform: none;
+        transform: none;
+      }
+      76% {
+        -webkit-transform: matrix(0.99, 0, 0, 1.01, 0, 0); 
+        transform: matrix(0.99, 0, 0, 1.01, 0, 0); 
+      }
+    }
+
+    @-webkit-keyframes wobbleTB {
+      24% {
+        -webkit-transform: matrix(1.04, 0, 0, 0.96, 0, 0); 
+        transform: matrix(1.04, 0, 0, 0.96, 0, 0); 
+      }
+      48% {
+        -webkit-transform: none;
+        transform: none;
+      }
+      76% {
+        -webkit-transform: matrix(1.01, 0, 0, 0.99, 0, 0);
+        transform: matrix(1.01, 0, 0, 0.99, 0, 0);
+      }
+
+    }
+
+  </style>
+</head>
+<body>
+  
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <clipPath id="mask">
+            <path d="M150-150V0H10A10,10,0,0,0,0-10,10,10,0,0,0-10,0,10,10,0,0,0,0,10,10,10,0,0,0,10,0L150-3V150H-150V-150" />
+            <animateTransform id="maskAnim" additive="sum" attributeName="transform" type="scale" from="1" to="15" begin="indefinite" dur="0.15s" fill="freeze"/>
+        </clipPath>
+    </defs>
+</svg>
+  
+
+<script>
+  // [[blue colors], [green colors] [yellow,orange colors] [pink colors]]
+  const blueColors = [[102, 135, 196], [56, 155, 217], [89, 147, 181], [0,140,255], [63, 148, 161]];
+  const greenColors = [[0,217,193], [44,165,141], [43, 186, 133], [142, 189, 81], [178, 219, 64]];
+  const yellOrColors = [[255,230,0], [235, 213, 16], [244, 154, 52], [255, 111, 0], [179, 137, 89]];
+  const pinkColors = [[211, 87, 73], [244,97,151], [214, 51, 152], [212, 25, 72], [181, 125, 145]];
+  const colors = [blueColors, greenColors, yellOrColors, pinkColors];
+  const mask = document.getElementById('mask');
+  const maskAn = document.getElementById('maskAnim');
+  const dirs = {0: 'R', 1: 'BR', 2: 'B', 3: 'BL', 4: 'L', '-4': 'L', '-3': 'TL', '-2': 'T', '-1': 'TR'};
+  let startLeft = 0;
+  let startTop = 10;
+
+  const setColor = function(el, color) {
+    el.style.background = 'radial-gradient(ellipse at center, rgba(' + color + ', 0.1) 0%, rgba(' + color + ', 0.1) 55%, rgba(' + color + ', 0.3) 95%, rgba(' + color + ', 1) 100%)';
+    el.style.borderColor = 'rgba(' + color + ', 0.2)';
+  }
+
+  const setSize = function(bubble, size) {
+    if (!size) {
+      const sizes = [11, 11.5, 12, 12.5, 13];
+      const idx = Math.floor(Math.random() * sizes.length);
+      size = sizes[idx];
+    } 
+    bubble.style.height = size + 'vw';
+    bubble.style.width = size + 'vw';
+    return size;
+  }
+
+  const generateAltColor = function(xSet) {
+    let setIdx;
+    if (xSet !== undefined) {
+      const nextPrev = Math.sign((Math.random() - 0.5));
+      setIdx = nextPrev + xSet;
+      if (setIdx > colors.length - 1) {
+        setIdx = 0;
+      } else if (setIdx === -1) {
+        setIdx = colors.length - 1;
+      }
+    } else {
+      setIdx = Math.floor(Math.random() * colors.length);
+    }
+    const colorIdx = Math.floor(Math.random() * colors[setIdx].length);
+    return colors[setIdx][colorIdx].join(', ');
+  }
+
+  const explode = function(el, color1, color2, posX, posY) {
+    const color3 = averageRGB(color1, color2);
+    const colors = [color1, color2, color3];
+    mask.setAttribute('transform', 'translate(' + posX + ' ' + posY +')');
+    maskAn.beginElement();
+    el.style.clipPath = 'url(#mask)';
+    // const height = el.getBoundingClientRect().bottom - el.getBoundingClientRect().top;
+
+
+
+
+
+
+    setTimeout(function() {
+      el.parentNode.removeChild(el);
+    }, 150);
+
+    
+    
+
+  }
+
+  const averageRGB = function(col1, col2) {
+    const arr1 = col1.split(', ') || [0, 140, 255];
+    const arr2 = col2.split(', ') || [0, 140, 255];
+    const newColor = [];
+    for (let i = 0; i < 3; i++) {
+      const val1 = parseInt(arr1[i]);
+      const val2 = parseInt(arr2[i]);
+      const val3 = Math.sqrt(((val1 * val1) + (val2 * val2))/2);
+      newColor.push(Math.round(val3));
+    }
+    return newColor.join(', ');
+  };
+
+  const findDirection = function(el, x, y, c) {
+    const r = (Math.round(el.getBoundingClientRect().bottom - el.getBoundingClientRect().top) + 2)/2;
+    if (c && (((x-r)*(x-r))+((y-r)*(y-r))) < ((r*0.45) * (r*0.45))) {
+      return 'center';
+    }
+    const degrees = (Math.atan2(y - r, x - r) * (180/Math.PI)); 
+    const sector = Math.round(degrees/45);
+    return dirs[sector];
+  }
+
+
+  const generateBubble = function(rbg, top, left, colorsetidx) {
+    const color = rbg.join(', ');
+    const altColor = generateAltColor(colorsetidx);
+    const b = document.createElement('div');
+    const main = document.createElement('div');
+    const alt = document.createElement('div');
+    b.classList.add('bubble');
+    main.classList.add('bubble-main-color');
+    alt.classList.add('bubble-alt-color');
+    setColor(main, color);
+    setColor(alt, altColor);
+    setSize(b);
+    b.style.marginTop = top + 'vw';
+    b.style.marginLeft = left + 'vw'
+    document.body.appendChild(b);
+    b.appendChild(main);
+    b.appendChild(alt);
+    b.addEventListener("click", function(e){
+      // const xClick = e.offsetX;
+      // const yClick = e.offsetY;
+      // const height = b.getBoundingClientRect().bottom - b.getBoundingClientRect().top;
+      // const xPercent = Math.round((xClick/height) *100);
+      // const yPercent = Math.round((yClick/height) *100);
+      // console.log(xPercent, yPercent);
+    explode(b, color, altColor, e.offsetX, e.offsetY);
+    // const dir = findDirection(b, e.offsetX, e.offsetY, true);
+    // console.log(dir);
+
+
+
+
+    }, false);
+    b.addEventListener("mouseenter", function(e) { 
+      if (!b.classList.contains('hovered')) {
+        const dir = findDirection(b, e.offsetX, e.offsetY, false);
+        b.classList.add('hovered');
+        b.classList.add('hov' + dir);
+        setTimeout(function(){
+          b.classList.remove('hovered');
+          b.classList.remove('hov' + dir);
+        }, 700)
+      }
+    }, false);
+
+  }
+
+
+ // generateBubble(colors[0][0], 30, 30, 0, 0);
+
+
+
+  for (let i = 0; i < blueColors.length; i++) {
+    generateBubble(blueColors[i], startTop, startLeft, 0);
+    startLeft+= 15;
+  }
+  
+
+
+</script>
+</body>
+</html>
