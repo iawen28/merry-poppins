@@ -81,11 +81,11 @@
 
     .bubble-main-color, .bubble-alt-color {
       position: absolute;
-        margin-top: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-        animation: colorFade 6s linear infinite;
+      margin-top: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      animation: colorFade 6s linear infinite;
     }
 
     .bubble-alt-color {
@@ -355,12 +355,6 @@
   
 
 <script>
-  // [[blue colors], [green colors] [yellow,orange colors] [pink colors]]
-  const blueColors = [[102, 135, 196], [56, 155, 217], [89, 147, 181], [0,140,255], [63, 148, 161]];
-  const greenColors = [[0,217,193], [44,165,141], [43, 186, 133], [142, 189, 81], [178, 219, 64]];
-  const yellOrColors = [[255,230,0], [235, 213, 16], [244, 154, 52], [255, 111, 0], [179, 137, 89]];
-  const pinkColors = [[211, 87, 73], [244,97,151], [214, 51, 152], [212, 25, 72], [181, 125, 145]];
-  const colors = [blueColors, greenColors, yellOrColors, pinkColors];
   const mask = document.getElementById('mask');
   const maskAn = document.getElementById('maskAnim');
   const dirs = {0: 'R', 1: 'BR', 2: 'B', 3: 'BL', 4: 'L', '-4': 'L', '-3': 'TL', '-2': 'T', '-1': 'TR'};
@@ -371,7 +365,7 @@
   }
 
   const setSize = function(bubble, size) {
-    if (!size) {
+    if (size === 'random') {
       const sizes = [11, 11.5, 12, 12.5, 13];
       const idx = Math.floor(Math.random() * sizes.length);
       size = sizes[idx];
@@ -379,23 +373,6 @@
     bubble.style.height = size + 'vw';
     bubble.style.width = size + 'vw';
     return size;
-  }
-
-  const generateAltColor = function(xSet) {
-    let setIdx;
-    if (xSet !== undefined) {
-      const nextPrev = Math.sign((Math.random() - 0.5));
-      setIdx = nextPrev + xSet;
-      if (setIdx > colors.length - 1) {
-        setIdx = 0;
-      } else if (setIdx === -1) {
-        setIdx = colors.length - 1;
-      }
-    } else {
-      setIdx = Math.floor(Math.random() * colors.length);
-    }
-    const colorIdx = Math.floor(Math.random() * colors[setIdx].length);
-    return colors[setIdx][colorIdx].join(', ');
   }
 
   const explode = function(el, color1, color2, posX, posY) {
@@ -438,25 +415,26 @@
     return dirs[sector];
   }
 
-
-  const generateBubble = function(rbg, top, left, colorsetidx) {
+  const generateBubble = function(rbg1, rbg2, top, left, size) {
     let color = null;
-    let altColor = null
+    let altColor = null;
     const b = document.createElement('div');
     const main = document.createElement('div');
     const alt = document.createElement('div');
     b.classList.add('bubble');
     main.classList.add('bubble-main-color');
     alt.classList.add('bubble-alt-color');
-    if (rbg) {
-      color = rbg.join(', ');
+    if (rbg1) {
+      Array.isArray(rbg1) ? color = rbg1.join(', ') : color = rbg1;
       setColor(main, color);
     }
-    if (colorsetidx) {
-      altColor = generateAltColor(colorsetidx);
+    if (rbg2) {
+      Array.isArray(rbg2) ? altColor = rbg2.join(', ') : altColor = rbg2;
       setColor(alt, altColor);
     }
-    setSize(b);
+    if (size) {
+      setSize(b, size);
+    }
     if (top !== null && left !== null) {
       b.style.marginTop = top + 'vw';
       b.style.marginLeft = left + 'vw';
@@ -466,7 +444,7 @@
     b.appendChild(alt);
 
     b.addEventListener("click", function(e){
-    explode(b, color, altColor, e.offsetX, e.offsetY);
+      explode(b, color, altColor, e.offsetX, e.offsetY);
     }, false);
 
     b.addEventListener("mouseenter", function(e) { 
@@ -480,17 +458,14 @@
         }, 700)
       }
     }, false);
-
   }
 
-  // for (let i = 0; i < blueColors.length; i++) {
-  //   generateBubble(blueColors[i], startTop, startLeft, 0);
-  //   startLeft+= 15;
-  // }
   let startLeft = 5;
   let startTop = 3;
-  for (let i=0; i<48; i++) {
-    generateBubble(null, startTop, startLeft, null);
+  for (let i=0; i<36; i++) {
+    let size;
+    i % 2 === 0 ? size = 'random' : size = null;
+    generateBubble(null, null, startTop, startLeft, size);
     startLeft += 15;
     if (startLeft > 87) {
       startTop += 15;
@@ -498,7 +473,6 @@
     }
   }
   
-
 </script>
 </body>
 </html>
