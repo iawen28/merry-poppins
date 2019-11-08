@@ -7,7 +7,6 @@
   <style>
     body {
       background-color: white;
-
     }
     svg {
       position: absolute;
@@ -337,7 +336,6 @@
         -webkit-transform: matrix(1.01, 0, 0, 0.99, 0, 0);
         transform: matrix(1.01, 0, 0, 0.99, 0, 0);
       }
-
     }
 
   </style>
@@ -355,6 +353,7 @@
   
 
 <script>
+  (function() {
   const mask = document.getElementById('mask');
   const maskAn = document.getElementById('maskAnim');
   const dirs = {0: 'R', 1: 'BR', 2: 'B', 3: 'BL', 4: 'L', '-4': 'L', '-3': 'TL', '-2': 'T', '-1': 'TR'};
@@ -472,6 +471,7 @@
       startLeft = 5;
     }
   }
+  })();
   
 </script>
 </body>
