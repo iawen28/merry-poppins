@@ -79,52 +79,208 @@
       transform-origin: 50% 10%;
     }
 
-    .bubble-main-color {
-      position: inherit;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 1px solid rgba(0, 140, 255, 0.2);
-      background: radial-gradient(ellipse at center, 
-        rgba(0,140,255, 0.1) 0%, 
-        rgba(0,140,255, 0.1) 55%, 
-        rgba(0,140,255, 0.3) 95%, 
-        rgba(0,140,255, 1) 100%
-      );
-      animation: mainColorFade 6s linear infinite;
-
+    .bubble-main-color, .bubble-alt-color {
+      position: absolute;
+        margin-top: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        animation: colorFade 6s linear infinite;
     }
+
     .bubble-alt-color {
-      position: inherit;
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
+      animation-delay: -3s;
+    }
+
+    .bubble:nth-of-type(9n+1) .bubble-main-color {
+      border: 1px solid rgba(45, 156, 224, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(45, 156, 224, 0.1) 0%,
+        rgba(45, 156, 224, 0.1) 55%,
+        rgba(45, 156, 224, 0.3) 95%,
+        rgba(45, 156, 224, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+2) .bubble-main-color {
+      border: 1px solid rgba(235, 213, 16, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(235, 213, 16, 0.1) 0%,
+        rgba(235, 213, 16, 0.1) 55%,
+        rgba(235, 213, 16, 0.3) 95%,
+        rgba(235, 213, 16, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+3) .bubble-main-color {
+      border: 1px solid rgba(244, 97, 151, 0.2);
+        background: radial-gradient(ellipse at center,
+        rgba(244, 97, 151, 0.1) 0%,
+        rgba(244, 97, 151, 0.1) 55%,
+        rgba(244, 97, 151, 0.3) 95%,
+        rgba(244, 97, 151, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+4) .bubble-main-color {
+      border: 1px solid rgba(244, 154, 52, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(244, 154, 52, 0.1) 0%,
+        rgba(244, 154, 52, 0.1) 55%,
+        rgba(244, 154, 52, 0.3) 95%,
+        rgba(244, 154, 52, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+5) .bubble-main-color {
+      border: 1px solid rgba(71, 159, 191, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(71, 159, 191, 0.1) 0%,
+        rgba(71, 159, 191, 0.1) 55%,
+        rgba(71, 159, 191, 0.3) 95%,
+        rgba(71, 159, 191, 1) 100%
+      ); 
+    }
+
+    .bubble:nth-of-type(9n+6) .bubble-main-color {
+      border: 1px solid rgba(118, 88, 219, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(118, 88, 219, 0.1) 0%,
+        rgba(118, 88, 219, 0.1) 55%,
+        rgba(118, 88, 219, 0.3) 95%,
+        rgba(118, 88, 219, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+7) .bubble-main-color {
+      border: 1px solid rgba(160, 140, 140, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(160, 140, 140, 0.1) 0%,
+        rgba(160, 140, 140, 0.1) 55%,
+        rgba(160, 140, 140, 0.3) 95%,
+        rgba(160, 140, 140, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+8) .bubble-main-color {
+      border: 1px solid rgba(43, 186, 133, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(43, 186, 133, 0.1) 0%,
+        rgba(43, 186, 133, 0.1) 55%,
+        rgba(43, 186, 133, 0.3) 95%,
+        rgba(43, 186, 133, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n) .bubble-main-color {
+      border: 1px solid rgba(244, 154, 52, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(244, 154, 52, 0.1) 0%,
+        rgba(244, 154, 52, 0.1) 55%,
+        rgba(244, 154, 52, 0.3) 95%,
+        rgba(244, 154, 52, 1) 100%
+      );
+    }
+
+    /*COLOR 2 */
+
+    .bubble:nth-of-type(9n+1) .bubble-alt-color {
+      border: 1px solid rgba(196, 104, 138, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(196, 104, 138, 0.1) 0%,
+        rgba(196, 104, 138, 0.1) 55%,
+        rgba(196, 104, 138, 0.3) 95%,
+        rgba(196, 104, 138, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+2) .bubble-alt-color {
       border: 1px solid rgba(0, 217, 193, 0.2);
-      background: radial-gradient(ellipse at center, 
-        rgba(0, 217, 193, 0.1) 0%, 
-        rgba(0, 217, 193, 0.1) 55%, 
-        rgba(0, 217, 193, 0.3) 95%, 
+      background: radial-gradient(ellipse at center,
+        rgba(0, 217, 193, 0.1) 0%,
+        rgba(0, 217, 193, 0.1) 55%,
+        rgba(0, 217, 193, 0.3) 95%,
         rgba(0, 217, 193, 1) 100%
       );
-      animation: altColorFade 6s linear infinite;
+    }
 
+    .bubble:nth-of-type(9n+3) .bubble-alt-color {
+      border: 1px solid rgba(235, 213, 16, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(235, 213, 16, 0.1) 0%,
+        rgba(235, 213, 16, 0.1) 55%,
+        rgba(235, 213, 16, 0.3) 95%,
+        rgba(235, 213, 16, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+4) .bubble-alt-color {
+      border: 1px solid rgba(110, 157, 245, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(110, 157, 245, 0.1) 0%,
+        rgba(110, 157, 245, 0.1) 55%,
+        rgba(110, 157, 245, 0.3) 95%,
+        rgba(110, 157, 245, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+5) .bubble-alt-color {
+      border: 1px solid rgba(165, 196, 96, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(165, 196, 96, 0.1) 0%,
+        rgba(165, 196, 96, 0.1) 55%,
+        rgba(165, 196, 96, 0.3) 95%,
+        rgba(165, 196, 96, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+6) .bubble-alt-color {
+      border: 1px solid rgba(43, 216, 255, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(43, 216, 255, 0.1) 0%,
+        rgba(43, 216, 255, 0.1) 55%,
+        rgba(43, 216, 255, 0.3) 95%,
+        rgba(43, 216, 255, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+7) .bubble-alt-color {
+      border: 1px solid rgba(255, 120, 120, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(255, 120, 120, 0.1) 0%,
+        rgba(255, 120, 120, 0.1) 55%,
+        rgba(255, 120, 120, 0.3) 95%,
+        rgba(255, 120, 120, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n+8) .bubble-alt-color {
+      border: 1px solid rgba(255, 230, 0, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(255, 230, 0, 0.1) 0%,
+        rgba(255, 230, 0, 0.1) 55%,
+        rgba(255, 230, 0, 0.3) 95%,
+        rgba(255, 230, 0, 1) 100%
+      );
+    }
+
+    .bubble:nth-of-type(9n) .bubble-alt-color {
+      border: 1px solid rgba(176, 160, 121, 0.2);
+      background: radial-gradient(ellipse at center,
+        rgba(176, 160, 121, 0.1) 0%,
+        rgba(176, 160, 121, 0.1) 55%,
+        rgba(176, 160, 121, 0.3) 95%,
+        rgba(176, 160, 121, 1) 100%
+      );
     }
 
     /*add other browsers*/
-    @-webkit-keyframes mainColorFade {
+    @-webkit-keyframes colorFade {
       0%, 100%{
         opacity: 1;
       }
       50% {
         opacity: 0;
-      }
-    }
-    @-webkit-keyframes altColorFade {
-      0%, 100%{
-        opacity: 0;
-      }
-      50% {
-        opacity: 1;
       }
     }
     @-webkit-keyframes wobbleTLBR {
@@ -208,8 +364,6 @@
   const mask = document.getElementById('mask');
   const maskAn = document.getElementById('maskAnim');
   const dirs = {0: 'R', 1: 'BR', 2: 'B', 3: 'BL', 4: 'L', '-4': 'L', '-3': 'TL', '-2': 'T', '-1': 'TR'};
-  let startLeft = 0;
-  let startTop = 10;
 
   const setColor = function(el, color) {
     el.style.background = 'radial-gradient(ellipse at center, rgba(' + color + ', 0.1) 0%, rgba(' + color + ', 0.1) 55%, rgba(' + color + ', 0.3) 95%, rgba(' + color + ', 1) 100%)';
@@ -245,25 +399,20 @@
   }
 
   const explode = function(el, color1, color2, posX, posY) {
-    const color3 = averageRGB(color1, color2);
-    const colors = [color1, color2, color3];
+    if (color1 && color2) {
+      const color3 = averageRGB(color1, color2);
+      const colors = [color1, color2, color3];
+    }
     mask.setAttribute('transform', 'translate(' + posX + ' ' + posY +')');
     maskAn.beginElement();
     el.style.clipPath = 'url(#mask)';
     // const height = el.getBoundingClientRect().bottom - el.getBoundingClientRect().top;
-
-
-
-
-
-
     setTimeout(function() {
-      el.parentNode.removeChild(el);
+      // el.parentNode.removeChild(el);
+      while (el.firstChild) {
+        el.removeChild(el.firstChild);
+      }
     }, 150);
-
-    
-    
-
   }
 
   const averageRGB = function(col1, col2) {
@@ -291,37 +440,35 @@
 
 
   const generateBubble = function(rbg, top, left, colorsetidx) {
-    const color = rbg.join(', ');
-    const altColor = generateAltColor(colorsetidx);
+    let color = null;
+    let altColor = null
     const b = document.createElement('div');
     const main = document.createElement('div');
     const alt = document.createElement('div');
     b.classList.add('bubble');
     main.classList.add('bubble-main-color');
     alt.classList.add('bubble-alt-color');
-    setColor(main, color);
-    setColor(alt, altColor);
+    if (rbg) {
+      color = rbg.join(', ');
+      setColor(main, color);
+    }
+    if (colorsetidx) {
+      altColor = generateAltColor(colorsetidx);
+      setColor(alt, altColor);
+    }
     setSize(b);
-    b.style.marginTop = top + 'vw';
-    b.style.marginLeft = left + 'vw'
+    if (top !== null && left !== null) {
+      b.style.marginTop = top + 'vw';
+      b.style.marginLeft = left + 'vw';
+    }
     document.body.appendChild(b);
     b.appendChild(main);
     b.appendChild(alt);
+
     b.addEventListener("click", function(e){
-      // const xClick = e.offsetX;
-      // const yClick = e.offsetY;
-      // const height = b.getBoundingClientRect().bottom - b.getBoundingClientRect().top;
-      // const xPercent = Math.round((xClick/height) *100);
-      // const yPercent = Math.round((yClick/height) *100);
-      // console.log(xPercent, yPercent);
     explode(b, color, altColor, e.offsetX, e.offsetY);
-    // const dir = findDirection(b, e.offsetX, e.offsetY, true);
-    // console.log(dir);
-
-
-
-
     }, false);
+
     b.addEventListener("mouseenter", function(e) { 
       if (!b.classList.contains('hovered')) {
         const dir = findDirection(b, e.offsetX, e.offsetY, false);
@@ -336,17 +483,21 @@
 
   }
 
-
- // generateBubble(colors[0][0], 30, 30, 0, 0);
-
-
-
-  for (let i = 0; i < blueColors.length; i++) {
-    generateBubble(blueColors[i], startTop, startLeft, 0);
-    startLeft+= 15;
+  // for (let i = 0; i < blueColors.length; i++) {
+  //   generateBubble(blueColors[i], startTop, startLeft, 0);
+  //   startLeft+= 15;
+  // }
+  let startLeft = 5;
+  let startTop = 3;
+  for (let i=0; i<48; i++) {
+    generateBubble(null, startTop, startLeft, null);
+    startLeft += 15;
+    if (startLeft > 87) {
+      startTop += 15;
+      startLeft = 5;
+    }
   }
   
-
 
 </script>
 </body>
